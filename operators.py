@@ -61,10 +61,10 @@ def neighborsNode(node):
     possNodes = []
     i, j = find(node.state, 0)
     # print(i, j)
-    possNodes.append(Node(up(node.state, i, j), node, None, node.depth + 1, node.heuristic))
-    possNodes.append(Node(down(node.state, i, j), node, None, node.depth + 1, node.heuristic))
-    possNodes.append(Node(left(node.state, i, j), node, None, node.depth + 1, node.heuristic))
-    possNodes.append(Node(right(node.state, i, j), node, None, node.depth + 1, node.heuristic))
+    possNodes.append(Node(up(node.state, i, j), node, "up", node.depth + 1, node.heuristic))
+    possNodes.append(Node(down(node.state, i, j), node, "down", node.depth + 1, node.heuristic))
+    possNodes.append(Node(left(node.state, i, j), node, "left", node.depth + 1, node.heuristic))
+    possNodes.append(Node(right(node.state, i, j), node, "right", node.depth + 1, node.heuristic))
 
     # print([a.state for a in possNodes])
     #check for invalid moves
