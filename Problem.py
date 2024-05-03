@@ -1,4 +1,4 @@
-import Node from Node.py
+from Node import Node
 
 
 class Problem:
