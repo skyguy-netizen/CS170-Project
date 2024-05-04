@@ -20,6 +20,12 @@ class Problem:
         else:
             return 0
 
+    def flatten(self, state):
+        l = []
+        for a in state:
+            l += a
+        return tuple(l)
+    
     def euclidean(self, node):
         dist = 0
         for i in range(len(node.state)):
@@ -42,15 +48,15 @@ class Problem:
                         count+=1
         return count
     
-    def fix(self, state):
-        return tuple(map(tuple, state))
+    # def fix(self, state):
+    #     return tuple(map(tuple, state))
 
     def search(self):
-        root = Node(initalState)
-        goal = Node(goalState)
+        root = Node(self.initalState)
+        goal = Node(self.goalState)
         frontier = [] #priorityqueue
         pq.heappush(frontier, root)
-        exploredSet = set()
+        exploredSet = defaultdict(bool)
 
         maxNodes = 1
 
@@ -69,21 +75,21 @@ class Problem:
                 currnode.printState()
 
             
-            exploredSet.add(self.fix(currnode.state))
+            exploredSet[self.flatten(currnode.state)] = True
             if currnode == goal:
                 print("Solution found")
                 print("Printing solution")
                 self.printSolution(currnode)
                 print("Max queue size:", maxNodes)
                 print("Nodes expanded:", len(exploredSet))
-                return True
+                return (True, maxNodes, len(exploredSet))
             else:
                 candidateNodes = neighborsNode(currnode)
                 for node in candidateNodes:
-                    if node not in frontier and self.fix(node.state) not in exploredSet:
+                    if node not in frontier and exploredSet[self.flatten(node.state)] == False:
                         node.heuristic = self.calcHeuristic(node)
                         pq.heappush(frontier, node)
-        return False
+        return (False, maxNodes, len(exploredSet))
 
     
     def printSolution(self, node: Node):
@@ -100,15 +106,16 @@ class Problem:
         return
     
 # initalState = [[1,2,3], [4,5,6], [7,8,0]] #trivial
-# initalState = [[1,2,3], [4,5,6], [7,0,8]] #very easy
-# initalState = [[1,2,0], [4,5,3], [7,8,6]] #easy
-# initalState = [[0,1,2], [4,5,3], [7,8,6]] #doable
-# initalState = [[1,2,3], [4,8,0], [7,6,5]] #trace
-initalState = [[8,7,1], [6, 0, 2], [5,4,3]] #oh boy
-# initalState = [[1,2,3], [4,5,6], [8,7,0]] #impossible
-goalState = [[1,2,3], [4,5,6], [7,8,0]]
+# # # initalState = [[1,2,3], [4,5,6], [7,0,8]] #very easy
+# # # initalState = [[1,2,0], [4,5,3], [7,8,6]] #easy
+# # # initalState = [[0,1,2], [4,5,3], [7,8,6]] #doable
+# # # initalState = [[1,2,3], [4,8,0], [7,6,5]] #trace
+# # initalState = [[8,7,1], [6, 0, 2], [5,4,3]] #oh boy
+# # # initalState = [[1,2,3], [4,5,6], [8,7,0]] #impossible
+# goalState = [[1,2,3], [4,5,6], [7,8,0]]
 
-# alg = Problem(initalState, goalState, "Misplaced", False)
-alg = Problem(initalState, goalState, "Euclidean", False)
+# # # alg = Problem(initalState, goalState, "Misplaced", False)
+# # alg = Problem(initalState, goalState, "Euclidean", False)
 # alg = Problem(initalState, goalState, False)
-alg.search()
+# alg.search()
+# print("Hello")
