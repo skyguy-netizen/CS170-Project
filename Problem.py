@@ -14,11 +14,13 @@ class Problem:
         if self.heuristic is None:
             return 0
         elif self.heuristic == "Euclidean":
-            return self.Euclidean(node)
+            return self.euclidean(node)
+        elif self.heuristic == "Misplaced":
+            return self.misplaced(node)
         else:
             return 0
 
-    def Euclidean(self, node):
+    def euclidean(self, node):
         dist = 0
         for i in range(len(node.state)):
             for j in range(len(node.state[0])):
@@ -29,7 +31,17 @@ class Problem:
                 squared_diff = [(actual[0]-expected[0]) ** 2, (actual[1]-expected[1]) ** 2]
                 dist += sum(squared_diff)**0.5
         return dist
-
+    
+    
+    def misplaced(self, node):
+        count = 0
+        for i in range(len(node.state)):
+            for j in range(len(node.state)):
+                if(node.state[i][j]!=0):
+                    if(node.state[i][j] != goalState[i][j]):
+                        count+=1
+        return count
+    
     def fix(self, state):
         return tuple(map(tuple, state))
 
@@ -91,10 +103,12 @@ class Problem:
 # initalState = [[1,2,3], [4,5,6], [7,0,8]] #very easy
 # initalState = [[1,2,0], [4,5,3], [7,8,6]] #easy
 # initalState = [[0,1,2], [4,5,3], [7,8,6]] #doable
-initalState = [[1,2,3], [4,8,0], [7,6,5]] #trace
-# initalState = [[8,7,1], [6, 0, 2], [5,4,3]] #oh boy
+# initalState = [[1,2,3], [4,8,0], [7,6,5]] #trace
+initalState = [[8,7,1], [6, 0, 2], [5,4,3]] #oh boy
 # initalState = [[1,2,3], [4,5,6], [8,7,0]] #impossible
 goalState = [[1,2,3], [4,5,6], [7,8,0]]
 
+# alg = Problem(initalState, goalState, "Misplaced", False)
 alg = Problem(initalState, goalState, "Euclidean", False)
+# alg = Problem(initalState, goalState, False)
 alg.search()
