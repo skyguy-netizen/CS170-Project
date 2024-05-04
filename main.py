@@ -33,11 +33,13 @@ def main():
         print(algo_choice)
 
         if algo_choice == "1":
-            print("in here 1")
+            algo = Problem(custom_puzzle,goalState)
+            algo.search()
         elif algo_choice == "2":
             print("in here 2")
         elif algo_choice == "3":
-            print("in here 3")
+            algo = Problem(custom_puzzle,goalState,"Euclidean",False)
+            algo.search()
 
 
     else:
