@@ -28,11 +28,12 @@ class Problem:
     
     def euclidean(self, node):
         dist = 0
+        side_len = len(node.state) #if its a 8 puzzle, 15 puzzle, 24 puzzle, etc.
         for i in range(len(node.state)):
             for j in range(len(node.state[0])):
-                expected = [(node.state[i][j]-1)//3,(node.state[i][j]-1)%3]
+                expected = [(node.state[i][j]-1)//side_len,(node.state[i][j]-1)%side_len]
                 if(expected[0] == -1):
-                    expected = [2,2]
+                    expected = [side_len - 1, side_len - 1]
                 actual = [i,j]
                 squared_diff = [(actual[0]-expected[0]) ** 2, (actual[1]-expected[1]) ** 2]
                 dist += sum(squared_diff)**0.5
@@ -44,7 +45,7 @@ class Problem:
         for i in range(len(node.state)):
             for j in range(len(node.state)):
                 if(node.state[i][j]!=0):
-                    if(node.state[i][j] != goalState[i][j]):
+                    if(node.state[i][j] != self.goalState[i][j]):
                         count+=1
         return count
     
@@ -70,7 +71,7 @@ class Problem:
                 print("\nThe best state to expand with g(n) = "
                     + str(int(currnode.depth))
                     + " and h(n) = " 
-                    + str(int(currnode.heuristic))
+                    + str(ceil(currnode.heuristic))
                     + " is...")
                 currnode.printState()
 
@@ -104,18 +105,3 @@ class Problem:
             a.printState()
         
         return
-    
-# initalState = [[1,2,3], [4,5,6], [7,8,0]] #trivial
-# # # initalState = [[1,2,3], [4,5,6], [7,0,8]] #very easy
-# # # initalState = [[1,2,0], [4,5,3], [7,8,6]] #easy
-# # # initalState = [[0,1,2], [4,5,3], [7,8,6]] #doable
-# # # initalState = [[1,2,3], [4,8,0], [7,6,5]] #trace
-# # initalState = [[8,7,1], [6, 0, 2], [5,4,3]] #oh boy
-# # # initalState = [[1,2,3], [4,5,6], [8,7,0]] #impossible
-# goalState = [[1,2,3], [4,5,6], [7,8,0]]
-
-# # # alg = Problem(initalState, goalState, "Misplaced", False)
-# # alg = Problem(initalState, goalState, "Euclidean", False)
-# alg = Problem(initalState, goalState, False)
-# alg.search()
-# print("Hello")

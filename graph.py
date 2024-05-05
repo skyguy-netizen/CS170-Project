@@ -9,9 +9,9 @@ ohboy = [[8,7,1], [6, 0, 2], [5,4,3]]
 imp = [[1,2,3], [4,5,6], [8,7,0]]
 goalState = [[1,2,3], [4,5,6], [7,8,0]]
 
-names = ["Trivial","Very easy", "Easy", "Trace", "Oh Boy"]
+names = ["Trivial","Very easy", "Easy", "Trace", "Oh boy"]
 
-l = [trivial, veasy, easy, trace, ohboy]
+l = [trivial, veasy, easy, trace]
 
 maxNodesUCS = []
 exploredSetUCS = []
@@ -48,12 +48,29 @@ for i in l:
     print("Doing Misplaced", names[j])
     alg = Problem(i, goalState, "Misplaced", False)
     vals = alg.search()
-    maxNodesEuc.append(vals[1])
-    exploredSetEuc.append(vals[2])
+    maxNodesMisplaced.append(vals[1])
+    exploredSetMisplaced.append(vals[2])
     j += 1
 
 
+print("Uniform Cost")
+print(maxNodesUCS)
+print(exploredSetUCS)
+print()
+print()
+print("A* Manhattan Heuristic")
+print(maxNodesMisplaced)
+print(exploredSetMisplaced)
+print()
+print()
+print("A* Euclidean Heuristic")
+print(maxNodesEuc)
+print(exploredSetEuc)
+print()
+print()
+
 # Plotting maxNodes
+plt.figsize((10, 15))
 # for i in range(len(names)):
 #     plt.plot(names[i], maxNodesUCS[i], label=f"{names[i]} (UCS)", marker='o')
 plt.plot(names, maxNodesUCS, label = "Uniform Cost Search", marker = 'o')
