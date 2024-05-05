@@ -2,12 +2,12 @@
 from Problem import Problem
 
 def main():
-    val = input("Type \"1\" to enter your own puzzle, otherwise press any key to escape: ")
+    val = input("Type \"1\" to enter your own puzzle, otherwise press any key to run a default puzzle: ")
     if val == "1":
-        print("Enter your puzzle, use a zero to represent the blank")
-        row1 = input("Enter the first row, use space between numbers:")
-        row2 = input("Enter the second row, use space between numbers:")
-        row3 = input("Enter the third row, use space between numbers:")
+        print("Enter your puzzle, use a zero to represent the blank and only spaces between numbers (don't include a space at the start or end)")
+        row1 = input("Enter the first row, use space between numbers: ")
+        row2 = input("Enter the second row, use space between numbers: ")
+        row3 = input("Enter the third row, use space between numbers: ")
 
         row1 = row1.split(" ")
         row2 = row2.split(" ")
@@ -23,8 +23,7 @@ def main():
         custom_puzzle.append(row3)
 
         goalState = [[1,2,3], [4,5,6], [7,8,0]]
-        # goalState = [[1,2], [3, 0]]
-        print("Enter your choice of algorithm")
+        print("Enter your choice of algorithm (1,2 3)")
         print("1 - Uniform Cost Search")
         print("2 - A* with the Misplaced Tile heuristic")
         print("3 - A* with the Euclidean distance heuristic")
@@ -34,7 +33,7 @@ def main():
         trace = (verbose == "yes")
 
         if algo_choice == "1":
-            algo = Problem(custom_puzzle,goalState)
+            algo = Problem(custom_puzzle, goalState)
             algo.search()
         elif algo_choice == "2":
             algo = Problem(custom_puzzle, goalState, "Misplaced", trace)
@@ -42,10 +41,14 @@ def main():
         elif algo_choice == "3":
             algo = Problem(custom_puzzle, goalState, "Euclidean", trace)
             algo.search()
-
-
     else:
-        print("end of program")
+        goalState = [[1,2,3], [4,5,6], [7,8,0]]
+        initalState = [[8,7,1], [6, 0, 2], [5,4,3]]
+        print(initalState)
+        print("Running A* with Euclidean on pre-defined initial state")
+        algo = Problem(initalState, goalState, "Euclidean", False)
+        algo.search()
+
 
 
 if __name__ == "__main__":

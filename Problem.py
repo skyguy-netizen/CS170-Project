@@ -2,6 +2,7 @@ from Node import Node
 import heapq as pq
 from collections import defaultdict
 from operators import neighborsNode, find
+import math
 
 class Problem:
     def __init__(self, initalState, goalState = None, heuristic = None, trace = False):
@@ -72,7 +73,7 @@ class Problem:
                 print("\nThe best state to expand with g(n) = "
                     + str(int(currnode.depth))
                     + " and h(n) = " 
-                    + str(ceil(currnode.heuristic))
+                    + str(math.ceil(currnode.heuristic))
                     + " is...")
                 currnode.printState()
 
