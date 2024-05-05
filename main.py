@@ -23,7 +23,7 @@ def main():
         custom_puzzle.append(row3)
 
         goalState = [[1,2,3], [4,5,6], [7,8,0]]
-
+        # goalState = [[1,2], [3, 0]]
         print("Enter your choice of algorithm")
         print("1 - Uniform Cost Search")
         print("2 - A* with the Misplaced Tile heuristic")
