@@ -48,9 +48,6 @@ class Problem:
                     if(node.state[i][j] != self.goalState[i][j]):
                         count+=1
         return count
-    
-    # def fix(self, state):
-    #     return tuple(map(tuple, state))
 
     def search(self):
         root = Node(self.initalState)
@@ -63,7 +60,10 @@ class Problem:
 
         while True:
             if not frontier:
-                return False
+                print("No solution")
+                print("Max Queue size: ", maxNodes)
+                print("Explored Nodes: ", len(exploredSet))
+                return (False, maxNodes, len(exploredSet))
             maxNodes = max(maxNodes, len(frontier))
             currnode = pq.heappop(frontier)
 

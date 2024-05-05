@@ -14,8 +14,15 @@ class Node:
     def __lt__(self, otherState):
         return (self.heuristic + self.depth) <= (otherState.heuristic + otherState.depth)
     
-    def __hash__(self):
-        return hash(self.state)
+    def find(self, puzzle_state, target):
+        for i, sublist in enumerate(puzzle_state):
+            try:
+                j = sublist.index(target)
+            except ValueError:
+                continue
+            return i, j
+                
+        return None, None
 
     def printState(self):
         self.printMove()
@@ -27,5 +34,14 @@ class Node:
 
     def printMove(self):
         if self.operator:
-            print("Move tile", self.operator)
-
+            i, j = self.find(self.state, 0)
+            if self.operator == "up":
+                print("Move ",self.state[i+1][j], "down")
+            elif self.operator == "down":
+                print("Move ",self.state[i-1][j], "up")
+            elif self.operator == "right":
+                print("Move ",self.state[i][j - 1], "left")
+            elif self.operator == "left":
+                print("Move ", self.state[i][j + 1], "right")
+            else:
+                return
