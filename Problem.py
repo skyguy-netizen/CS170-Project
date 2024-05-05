@@ -80,7 +80,7 @@ class Problem:
             
             exploredSet[self.flatten(currnode.state)] = True
             if currnode == goal:
-                print("Solution found")
+                print("Solution found at depth", currnode.depth)
                 print("Printing solution")
                 self.printSolution(currnode)
                 print("Max queue size:", maxNodes)
