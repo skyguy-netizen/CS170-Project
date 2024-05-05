@@ -9,9 +9,9 @@ ohboy = [[8,7,1], [6, 0, 2], [5,4,3]]
 imp = [[1,2,3], [4,5,6], [8,7,0]]
 goalState = [[1,2,3], [4,5,6], [7,8,0]]
 
-names = ["Trivial","Very easy", "Easy", "Trace", "Oh boy"]
+names = ["Trivial","Very easy", "Easy", "Trace", "Oh Boy"]
 
-l = [trivial, veasy, easy, trace]
+l = [trivial, veasy, easy, trace, ohboy]
 
 maxNodesUCS = []
 exploredSetUCS = []
@@ -70,7 +70,7 @@ print()
 print()
 
 # Plotting maxNodes
-plt.figsize((10, 15))
+plt.figure(figsize = (15, 10))
 # for i in range(len(names)):
 #     plt.plot(names[i], maxNodesUCS[i], label=f"{names[i]} (UCS)", marker='o')
 plt.plot(names, maxNodesUCS, label = "Uniform Cost Search", marker = 'o')

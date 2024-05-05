@@ -31,12 +31,13 @@ class Problem:
         side_len = len(node.state) #if its a 8 puzzle, 15 puzzle, 24 puzzle, etc.
         for i in range(len(node.state)):
             for j in range(len(node.state[0])):
-                expected = [(node.state[i][j]-1)//side_len,(node.state[i][j]-1)%side_len]
-                if(expected[0] == -1):
-                    expected = [side_len - 1, side_len - 1]
-                actual = [i,j]
-                squared_diff = [(actual[0]-expected[0]) ** 2, (actual[1]-expected[1]) ** 2]
-                dist += sum(squared_diff)**0.5
+                if(node.state[i][j]!=0):
+                    expected = [(node.state[i][j]-1)//side_len,(node.state[i][j]-1)%side_len]
+                    if(expected[0] == -1):
+                        expected = [side_len - 1, side_len - 1]
+                    actual = [i,j]
+                    squared_diff = [(actual[0]-expected[0]) ** 2, (actual[1]-expected[1]) ** 2]
+                    dist += sum(squared_diff)**0.5
         return dist
     
     
@@ -103,5 +104,4 @@ class Problem:
         sol_path = sol_path[::-1]
         for a in sol_path:
             a.printState()
-        
         return

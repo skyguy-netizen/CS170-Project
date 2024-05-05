@@ -36,12 +36,12 @@ class Node:
         if self.operator:
             i, j = self.find(self.state, 0)
             if self.operator == "up":
-                print("Move ",self.state[i+1][j], "down")
+                print("Move",self.state[i+1][j], "down")
             elif self.operator == "down":
-                print("Move ",self.state[i-1][j], "up")
+                print("Move",self.state[i-1][j], "up")
             elif self.operator == "right":
-                print("Move ",self.state[i][j - 1], "left")
+                print("Move",self.state[i][j - 1], "left")
             elif self.operator == "left":
-                print("Move ", self.state[i][j + 1], "right")
+                print("Move", self.state[i][j + 1], "right")
             else:
                 return
