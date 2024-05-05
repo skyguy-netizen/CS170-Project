@@ -30,9 +30,9 @@ class Problem:
         dist = 0
         for i in range(len(node.state)):
             for j in range(len(node.state[0])):
-                expected = [(node.state[i][j]-1)//3,(node.state[i][j]-1)%3]
+                expected = [(node.state[i][j]-1)//len(node.state[0]),(node.state[i][j]-1)%len(node.state[0])]
                 if(expected[0] == -1):
-                    expected = [2,2]
+                    expected = [len(node.state[0])-1,len(node.state[0])-1]
                 actual = [i,j]
                 squared_diff = [(actual[0]-expected[0]) ** 2, (actual[1]-expected[1]) ** 2]
                 dist += sum(squared_diff)**0.5
